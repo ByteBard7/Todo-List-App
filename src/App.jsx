@@ -9,11 +9,18 @@ const App = () => {
     setTodos((prevTodos) => {
       return [...prevTodos, { id: crypto.randomUUID(), title: newTodo }];
     });
+    setNewTodo("");
   };
+
+  // console.log(todos);
 
   const handleInput = (e) => {
     // console.log(e.target.value);
     setNewTodo(e.target.value);
+  };
+
+  const handleDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -22,6 +29,14 @@ const App = () => {
         <input type="text" value={newTodo} onChange={handleInput} />
         <button type="submit">Add</button>
       </form>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.title}{" "}
+            <button onClick={() => handleDelete(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
