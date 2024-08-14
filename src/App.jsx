@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import TodoInput from "./components/TodoInput";
+import Todos from "./components/Todos";
 
 const App = () => {
   const [newTodo, setNewTodo] = useState("");
@@ -13,13 +15,15 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos((prevTodos) => {
-      return [
-        ...prevTodos,
-        { id: crypto.randomUUID(), title: newTodo, completed: false },
-      ];
-    });
-    setNewTodo("");
+    if (newTodo) {
+      setTodos((prevTodos) => {
+        return [
+          ...prevTodos,
+          { id: crypto.randomUUID(), title: newTodo, completed: false },
+        ];
+      });
+      setNewTodo("");
+    }
   };
 
   // console.log(todos);
@@ -42,28 +46,16 @@ const App = () => {
   return (
     <div>
       <h1>Todo List</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={newTodo} onChange={handleInput} />
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <label>
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={(e) => {
-                  console.log(todo.title, " ", e.target.checked);
-                  toggleTodo(todo.id, e.target.checked);
-                }}
-              />
-              {todo.title}
-            </label>
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <TodoInput
+        handleSubmit={handleSubmit}
+        handleInput={handleInput}
+        newTodo={newTodo}
+      />
+      <Todos
+        todos={todos}
+        toggleTodo={toggleTodo}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };
