@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const localTodos = JSON.parse(localStorage.getItem("todoList"));
+    return localTodos ? localTodos : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todos));
+  }, [todos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
