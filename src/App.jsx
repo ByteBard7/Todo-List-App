@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoInput from "./components/TodoInput";
 import Todos from "./components/Todos";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [newTodo, setNewTodo] = useState("");
@@ -8,6 +9,7 @@ const App = () => {
     const localTodos = JSON.parse(localStorage.getItem("todoList"));
     return localTodos ? localTodos : [];
   });
+  const [notifyMsg, setNotifyMsg] = useState("");
 
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todos));
@@ -22,7 +24,12 @@ const App = () => {
           { id: crypto.randomUUID(), title: newTodo, completed: false },
         ];
       });
+      setNotifyMsg("Todo added successfully");
+      setTimeout(() => setNotifyMsg(""), 3000);
       setNewTodo("");
+    } else {
+      setNotifyMsg("Todo input cannot be empty");
+      setTimeout(() => setNotifyMsg(""), 3000);
     }
   };
 
@@ -35,6 +42,8 @@ const App = () => {
 
   const handleDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
+    setNotifyMsg("Todo deleted successfully");
+    setTimeout(() => setNotifyMsg(""), 3000);
   };
 
   const toggleTodo = (id, completed) => {
@@ -46,6 +55,7 @@ const App = () => {
   return (
     <div>
       <h1>Todo List</h1>
+      <Notification message={notifyMsg} />
       <TodoInput
         handleSubmit={handleSubmit}
         handleInput={handleInput}
