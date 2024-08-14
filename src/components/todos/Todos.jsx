@@ -1,8 +1,10 @@
+import Todo from "./Todo";
+
 const Todos = ({ todos, toggleTodo, handleDelete }) => {
   return (
     <div>
       <ul>
-        {todos.map((todo) => (
+        {/* {todos.map((todo) => (
           <li key={todo.id}>
             <label>
               <input
@@ -17,6 +19,14 @@ const Todos = ({ todos, toggleTodo, handleDelete }) => {
             </label>
             <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </li>
+        ))} */}
+        {todos.map((todo) => (
+          <Todo
+            key={todo.id}
+            todo={todo}
+            toggleTodo={toggleTodo}
+            handleDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>

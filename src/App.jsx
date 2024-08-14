@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TodoInput from "./components/TodoInput";
-import Todos from "./components/Todos";
+import Todos from "./components/todos/Todos";
 import Notification from "./components/Notification";
 
 const App = () => {
