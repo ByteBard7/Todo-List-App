@@ -14,7 +14,10 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setTodos((prevTodos) => {
-      return [...prevTodos, { id: crypto.randomUUID(), title: newTodo }];
+      return [
+        ...prevTodos,
+        { id: crypto.randomUUID(), title: newTodo, completed: false },
+      ];
     });
     setNewTodo("");
   };
@@ -30,8 +33,15 @@ const App = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const toggleTodo = (id, completed) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, completed } : todo))
+    );
+  };
+
   return (
     <div>
+      <h1>Todo List</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" value={newTodo} onChange={handleInput} />
         <button type="submit">Add</button>
@@ -39,7 +49,17 @@ const App = () => {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            {todo.title}{" "}
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={(e) => {
+                  console.log(todo.title, " ", e.target.checked);
+                  toggleTodo(todo.id, e.target.checked);
+                }}
+              />
+              {todo.title}
+            </label>
             <button onClick={() => handleDelete(todo.id)}>Delete</button>
           </li>
         ))}
