@@ -16,7 +16,7 @@ const Todo = ({ todo, toggleTodo, handleDelete }) => {
         {todo.title}
       </label>
       <button onClick={() => handleDelete(todo.id)} className={styles.button}>
-        <i class="fa-solid fa-trash"></i>
+        <i className="fa-solid fa-trash"></i>
       </button>
     </li>
   );
