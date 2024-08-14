@@ -1,0 +1,25 @@
+.button,
+.input {
+  border: none;
+  padding: 4px 10px;
+}
+
+.input {
+  background-color: white;
+  border-radius: 10px 0 0 10px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.button {
+  border-radius: 0 10px 10px 0;
+  background-color: orange;
+  cursor: pointer;
+}
+
+.form {
+  margin: 20px 0;
+}
+

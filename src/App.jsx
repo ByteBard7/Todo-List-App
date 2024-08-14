@@ -53,9 +53,9 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
+    <div className="container">
       <Notification message={notifyMsg} />
+      <h1>📝Todo List</h1>
       <TodoInput
         handleSubmit={handleSubmit}
         handleInput={handleInput}

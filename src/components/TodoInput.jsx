@@ -1,8 +1,17 @@
+import styles from "./styles/todoInput.module.css";
+
 const TodoInput = ({ handleSubmit, handleInput, newTodo }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={newTodo} onChange={handleInput} />
-      <button type="submit">Add</button>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={handleInput}
+        className={styles.input}
+      />
+      <button type="submit" className={styles.button}>
+        Add
+      </button>
     </form>
   );
 };
